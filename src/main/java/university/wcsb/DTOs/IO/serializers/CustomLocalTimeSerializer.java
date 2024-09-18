@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 public class CustomLocalTimeSerializer extends JsonSerializer<LocalTime> {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
 
-    public void serialize(LocalTime value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
-        gen.writeString(value.format(FORMATTER));
+    public void serialize(LocalTime localTime, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
+        jsonGenerator.writeString(localTime.format(FORMATTER));
     }
 }
