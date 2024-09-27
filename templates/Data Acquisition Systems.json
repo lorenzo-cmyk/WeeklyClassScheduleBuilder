@@ -1,13 +1,13 @@
 {
   "name" : "Data Acquisition Systems",
   "weeklyLessons" : [ {
-    "id" : 3,
+    "id" : 5,
     "dayOfWeek" : "TUESDAY",
     "startTime" : "14:15",
     "endTime" : "16:15",
     "room" : "21.6.3"
   }, {
-    "id" : 4,
+    "id" : 6,
     "dayOfWeek" : "THURSDAY",
     "startTime" : "14:15",
     "endTime" : "16:15",
