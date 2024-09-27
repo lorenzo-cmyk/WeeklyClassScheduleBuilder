@@ -1,13 +1,13 @@
 {
   "name" : "Formal Languages and Compilers",
   "weeklyLessons" : [ {
-    "id" : 1,
+    "id" : 2,
     "dayOfWeek" : "TUESDAY",
     "startTime" : "08:15",
     "endTime" : "10:15",
     "room" : "21.S.2"
   }, {
-    "id" : 2,
+    "id" : 3,
     "dayOfWeek" : "THURSDAY",
     "startTime" : "10:15",
     "endTime" : "12:15",
