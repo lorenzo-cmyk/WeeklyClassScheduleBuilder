@@ -22,7 +22,8 @@ public class Main {
 
             if (commandLine.hasOption("v")) {
                 if (commandLine.getOptions().length != 1) {
-                    throw new ParseException("Invalid combination of options provided. Please use the -h flag for help.");
+                    throw new ParseException("Invalid combination of options provided. " +
+                            "Please use the -h flag for help.");
                 }
                 System.out.println("WCSB - Weekly Class Schedule Builder V0.1");
 
@@ -31,7 +32,8 @@ public class Main {
 
             if (commandLine.hasOption("h")) {
                 if (commandLine.getOptions().length != 1) {
-                    throw new ParseException("Invalid combination of options provided. Please use the -h flag for help.");
+                    throw new ParseException("Invalid combination of options provided. " +
+                            "Please use the -h flag for help.");
                 }
                 helpFormatter.printHelp("WCSB", options);
 
@@ -40,10 +42,12 @@ public class Main {
 
             if (commandLine.hasOption("e")) {
                 if (!commandLine.hasOption("o")) {
-                    throw new ParseException("Invalid combination of options provided. Please use the -h flag for help.");
+                    throw new ParseException("Invalid combination of options provided. " +
+                            "Please use the -h flag for help.");
                 }
                 if (commandLine.getOptions().length != 2) {
-                    throw new ParseException("Invalid combination of options provided. Please use the -h flag for help.");
+                    throw new ParseException("Invalid combination of options provided. " +
+                            "Please use the -h flag for help.");
                 }
                 Path outputPath = validateOutputPath(commandLine.getOptionValue("o"));
 
@@ -54,10 +58,12 @@ public class Main {
 
             if (commandLine.hasOption("i")) {
                 if (!commandLine.hasOption("s") || !commandLine.hasOption("o")) {
-                    throw new ParseException("Invalid combination of options provided. Please use the -h flag for help.");
+                    throw new ParseException("Invalid combination of options provided. " +
+                            "Please use the -h flag for help.");
                 }
                 if (commandLine.getOptions().length != 3) {
-                    throw new ParseException("Invalid combination of options provided. Please use the -h flag for help.");
+                    throw new ParseException("Invalid combination of options provided. " +
+                            "Please use the -h flag for help.");
                 }
                 Path inputPath = validateInputPath(commandLine.getOptionValue("i"));
                 LocalDate startDay = validateStartDate(commandLine.getOptionValue("s"));
@@ -70,10 +76,12 @@ public class Main {
 
             if (commandLine.hasOption("d")) {
                 if (!commandLine.hasOption("s") || !commandLine.hasOption("o")) {
-                    throw new ParseException("Invalid combination of options provided. Please use the -h flag for help.");
+                    throw new ParseException("Invalid combination of options provided. " +
+                            "Please use the -h flag for help.");
                 }
                 if (commandLine.getOptions().length != 3) {
-                    throw new ParseException("Invalid combination of options provided. Please use the -h flag for help.");
+                    throw new ParseException("Invalid combination of options provided. " +
+                            "Please use the -h flag for help.");
                 }
                 Path inputDirectoryPath = validateInputDirectoryPath(commandLine.getOptionValue("d"));
                 LocalDate startDay = validateStartDate(commandLine.getOptionValue("s"));
@@ -97,31 +105,39 @@ public class Main {
         options.addOption("v", "version", false,
                 "Displays the current version of the program.");
         options.addOption("e", "example", false,
-                "Generates an example JSON file. Must be used with -o (output).");
+                "Generates an example JSON file. " +
+                        "Must be used with -o (output).");
         options.addOption("s", "startDay", true,
-                "Specifies the week start date. Must be a Monday formatted as YYYY-MM-DD.");
+                "Specifies the week start date. " +
+                        "Must be a Monday formatted as YYYY-MM-DD.");
         options.addOption("o", "output", true,
                 "Specifies the output file path for saving the generated result.");
         options.addOption("i", "input", true,
-                "Specifies the input JSON file to be processed into a usable ICS file. Must be used with -s (startDay) and -o (output).");
+                "Specifies the input JSON file to be processed into a usable ICS file. " +
+                        "Must be used with -s (startDay) and -o (output).");
         options.addOption("d", "directory", true,
-                "Specifies the input directory - containing multiple JSON files - to perform a batch conversion into usable ICS files. Must be used with -s (startDay) and -o (output)." +
-                        " The -o (output) flag should specify a output directory. The output folder will be created automatically.");
+                "Specifies the input directory - containing multiple JSON files - to perform a batch " +
+                        "conversion into usable ICS files. Must be used with -s (startDay) and -o (output). " +
+                        "The output flag should specify an output directory. " +
+                        "The destination folder will be created automatically.");
         return options;
     }
 
     private static Path validateOutputPath(String path) throws ParseException {
         if (path == null || path.isBlank()) {
-            throw new ParseException("No output file path provided. Please provide a valid file path.");
+            throw new ParseException("No output file path provided. " +
+                    "Please provide a valid file path.");
         }
 
         Path toBeCreatedFilePath = Paths.get(path);
         if (toBeCreatedFilePath.toFile().exists()) {
             if (toBeCreatedFilePath.toFile().isFile()) {
-                throw new ParseException("A file already exists at the output file path provided. Please provide a valid file path.");
+                throw new ParseException("A file already exists at the output file path provided. " +
+                        "Please provide a valid file path.");
             }
             if (toBeCreatedFilePath.toFile().isDirectory()) {
-                throw new ParseException("The output file path provided is a directory. Please provide a valid file path.");
+                throw new ParseException("The output file path provided is a directory. " +
+                        "Please provide a valid file path.");
             }
         }
         return toBeCreatedFilePath;
@@ -129,46 +145,55 @@ public class Main {
 
     private static Path validateInputPath(String path) throws ParseException {
         if (path == null || path.isBlank()) {
-            throw new ParseException("No input file path provided. Please provide a valid file path.");
+            throw new ParseException("No input file path provided. " +
+                    "Please provide a valid file path.");
         }
 
         Path toBeReadFilePath = Paths.get(path);
         if (!toBeReadFilePath.toFile().exists()) {
-            throw new ParseException("The input file path provided does not exist. Please provide a valid file path.");
+            throw new ParseException("The input file path provided does not exist. " +
+                    "Please provide a valid file path.");
         }
         if (toBeReadFilePath.toFile().isDirectory()) {
-            throw new ParseException("The input file path provided is a directory. Please provide a valid file path.");
+            throw new ParseException("The input file path provided is a directory. " +
+                    "Please provide a valid file path.");
         }
         return toBeReadFilePath;
     }
 
     private static Path validateInputDirectoryPath(String path) throws ParseException {
         if (path == null || path.isBlank()) {
-            throw new ParseException("No directory path provided. Please provide a valid directory path.");
+            throw new ParseException("No directory path provided. " +
+                    "Please provide a valid directory path.");
         }
 
         Path toBeReadDirectoryPath = Paths.get(path);
         if (!toBeReadDirectoryPath.toFile().exists()) {
-            throw new ParseException("The directory path provided does not exist. Please provide a valid directory path.");
+            throw new ParseException("The directory path provided does not exist. " +
+                    "Please provide a valid directory path.");
         }
         if (toBeReadDirectoryPath.toFile().isFile()) {
-            throw new ParseException("The directory path provided is a file. Please provide a valid directory path.");
+            throw new ParseException("The directory path provided is a file. " +
+                    "Please provide a valid directory path.");
         }
         return toBeReadDirectoryPath;
     }
 
     private static Path validateOutputDirectoryPath(String path) throws ParseException {
         if (path == null || path.isBlank()) {
-            throw new ParseException("No directory path provided. Please provide a valid directory path.");
+            throw new ParseException("No directory path provided. " +
+                    "Please provide a valid directory path.");
         }
 
         Path toBeCreatedDirectoryPath = Paths.get(path);
         if (toBeCreatedDirectoryPath.toFile().exists()) {
             if (toBeCreatedDirectoryPath.toFile().isFile()) {
-                throw new ParseException("A file already exists at the output directory path provided. Please provide a valid directory path.");
+                throw new ParseException("A file already exists at the output directory path provided. " +
+                        "Please provide a valid directory path.");
             }
             if (toBeCreatedDirectoryPath.toFile().isDirectory()) {
-                throw new ParseException("The output directory already exists. Please provide a valid directory path.");
+                throw new ParseException("The output directory already exists. " +
+                        "Please provide a valid directory path.");
             }
         }
         return toBeCreatedDirectoryPath;
@@ -176,12 +201,14 @@ public class Main {
 
     private static LocalDate validateStartDate(String startDate) throws ParseException {
         if (startDate == null || startDate.isBlank()) {
-            throw new ParseException("No start date provided. Please provide a valid start date.");
+            throw new ParseException("No start date provided. " +
+                    "Please provide a valid start date.");
         }
 
         LocalDate startDay = LocalDate.parse(startDate);
         if (startDay.getDayOfWeek() != DayOfWeek.MONDAY) {
-            throw new ParseException("The start date provided is not a Monday. Please provide a valid start date.");
+            throw new ParseException("The start date provided is not a Monday. " +
+                    "Please provide a valid start date.");
         }
         return startDay;
     }
