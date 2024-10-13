@@ -68,6 +68,22 @@ public class Main {
                 return;
             }
 
+            if (commandLine.hasOption("d")) {
+                if (!commandLine.hasOption("s") || !commandLine.hasOption("o")) {
+                    throw new ParseException("Invalid combination of options provided. Please use the -h flag for help.");
+                }
+                if (commandLine.getOptions().length != 3) {
+                    throw new ParseException("Invalid combination of options provided. Please use the -h flag for help.");
+                }
+                Path inputDirectoryPath = validateInputDirectoryPath(commandLine.getOptionValue("d"));
+                LocalDate startDay = validateStartDate(commandLine.getOptionValue("s"));
+                Path outputDirectoryPath = validateOutputDirectoryPath(commandLine.getOptionValue("o"));
+
+                ConvertJSONtoICS.convertJSONDirectoryToICS(inputDirectoryPath, startDay, outputDirectoryPath);
+
+                return;
+            }
+
             helpFormatter.printHelp("WCSB", options);
         } catch (ParseException e) {
             System.out.println("Error - " + e.getMessage());
@@ -88,6 +104,9 @@ public class Main {
                 "Specifies the output file path for saving the generated result.");
         options.addOption("i", "input", true,
                 "Specifies the input JSON file to be processed into a usable ICS file. Must be used with -s (startDay) and -o (output).");
+        options.addOption("d", "directory", true,
+                "Specifies the input directory - containing multiple JSON files - to perform a batch conversion into usable ICS files. Must be used with -s (startDay) and -o (output)." +
+                        " The -o (output) flag should specify a output directory. The output folder will be created automatically.");
         return options;
     }
 
@@ -121,6 +140,38 @@ public class Main {
             throw new ParseException("The input file path provided is a directory. Please provide a valid file path.");
         }
         return toBeReadFilePath;
+    }
+
+    private static Path validateInputDirectoryPath(String path) throws ParseException {
+        if (path == null || path.isBlank()) {
+            throw new ParseException("No directory path provided. Please provide a valid directory path.");
+        }
+
+        Path toBeReadDirectoryPath = Paths.get(path);
+        if (!toBeReadDirectoryPath.toFile().exists()) {
+            throw new ParseException("The directory path provided does not exist. Please provide a valid directory path.");
+        }
+        if (toBeReadDirectoryPath.toFile().isFile()) {
+            throw new ParseException("The directory path provided is a file. Please provide a valid directory path.");
+        }
+        return toBeReadDirectoryPath;
+    }
+
+    private static Path validateOutputDirectoryPath(String path) throws ParseException {
+        if (path == null || path.isBlank()) {
+            throw new ParseException("No directory path provided. Please provide a valid directory path.");
+        }
+
+        Path toBeCreatedDirectoryPath = Paths.get(path);
+        if (toBeCreatedDirectoryPath.toFile().exists()) {
+            if (toBeCreatedDirectoryPath.toFile().isFile()) {
+                throw new ParseException("A file already exists at the output directory path provided. Please provide a valid directory path.");
+            }
+            if (toBeCreatedDirectoryPath.toFile().isDirectory()) {
+                throw new ParseException("The output directory already exists. Please provide a valid directory path.");
+            }
+        }
+        return toBeCreatedDirectoryPath;
     }
 
     private static LocalDate validateStartDate(String startDate) throws ParseException {
