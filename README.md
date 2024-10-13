@@ -18,6 +18,9 @@ To use WCSB, you can use the following command-line options:
 - `-o`, `--output`: Specifies the output file path for saving the generated result.
 - `-i`, `--input`: Specifies the input JSON file to be processed into a usable ICS file. Must be used with `-s` (
   startDay) and `-o` (output).
+- `-d`, `--directory`: Specifies the input directory - containing multiple JSON files - to perform a batch conversion 
+  into usable ICS files. Must be used with `-s` (startDay) and `-o` (output). The output flag should specify an output 
+  directory. The destination folder will be created automatically.
 
 ### Examples
 
@@ -39,4 +42,9 @@ To use WCSB, you can use the following command-line options:
 4. Convert a JSON file to an ICS file:
     ```sh
     java -jar WCSB.jar -i /path/to/input/schedule.json -s 2023-10-02 -o /path/to/output/schedule.ics
+    ```
+
+5. Convert multiple JSON files to ICS files:
+    ```sh
+    java -jar WCSB.jar -d /path/to/input/directory -s 2023-10-02 -o /path/to/output/directory
     ```
