@@ -1,22 +1,26 @@
 {
-  "name" : "Analisi Matematica 2",
-  "weeklyLessons" : [ {
-    "id" : 8,
-    "dayOfWeek" : "MONDAY",
-    "startTime" : "14:15",
-    "endTime" : "17:15",
-    "room" : "26.1.5"
-  }, {
-    "id" : 9,
-    "dayOfWeek" : "TUESDAY",
-    "startTime" : "11:15",
-    "endTime" : "13:15",
-    "room" : "2.0.1"
-  }, {
-    "id" : 9,
-    "dayOfWeek" : "THURSDAY",
-    "startTime" : "13:15",
-    "endTime" : "16:15",
-    "room" : "6.0.1" 
-  } ]
+  "name": "Analisi Matematica 2",
+  "weeklyLessons": [
+    {
+      "id": 10,
+      "dayOfWeek": "MONDAY",
+      "startTime": "14:15",
+      "endTime": "17:15",
+      "room": "26.1.5"
+    },
+    {
+      "id": 11,
+      "dayOfWeek": "TUESDAY",
+      "startTime": "11:15",
+      "endTime": "13:15",
+      "room": "2.0.1"
+    },
+    {
+      "id": 12,
+      "dayOfWeek": "THURSDAY",
+      "startTime": "13:15",
+      "endTime": "16:15",
+      "room": "6.0.1"
+    }
+  ]
 }
