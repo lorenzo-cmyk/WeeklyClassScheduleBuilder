@@ -2,14 +2,14 @@
   "name": "Foundations of Operations Research",
   "weeklyLessons": [
     {
-      "id": 17,
+      "id": 19,
       "dayOfWeek": "MONDAY",
       "startTime": "16:15",
       "endTime": "19:15",
       "room": "B.2.4"
     },
     {
-      "id": 18,
+      "id": 19,
       "dayOfWeek": "TUESDAY",
       "startTime": "10:15",
       "endTime": "12:15",
